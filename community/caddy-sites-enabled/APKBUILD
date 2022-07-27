@@ -1,0 +1,22 @@
+# Contributor: Autumn Russell <autumn@adrusi.com>
+# Maintainer: Autumn Russell <autumn@adrusi.com>
+pkgname=caddy-sites-enabled
+pkgver=1
+pkgrel=0
+pkgdesc="load caddy config from a glob pattern"
+url="https://example.org/"
+license="MIT"
+arch="noarch"
+options="!check" # no test suite
+replaces="caddy"
+depends="caddy"
+source="Caddyfile"
+
+package() {
+	cd "$srcdir"
+
+	install -m 644 -D Caddyfile "$pkgdir"/etc/caddy/Caddyfile
+	install -m 755 -d "$pkgdir"/etc/caddy/sites-enabled
+}
+
+sha512sums="aad7b51208d8745172632f9230f29a5d441c4a760bfdf2961b9bebc16e44359cdfa88b16997057184979d35c947bbbde5078e0c9ae7d8daf9e028bf87fafdd78  Caddyfile"
