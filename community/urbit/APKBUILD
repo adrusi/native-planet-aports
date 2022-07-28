@@ -1,0 +1,23 @@
+# Contributor: Autumn Russell <autumn@adrusi.com>
+# Maintainer: Autumn Russell <autumn@adrusi.com>
+pkgname=urbit
+pkgver=1.9
+pkgrel=0
+pkgdesc="An operating function"
+url="https://urbit.org/"
+license="MIT"
+_arch="$(uname -m)"
+arch="x86_64 aarch64"
+options="!check" # no test suite
+source="urbit.tar.gz::https://github.com/urbit/urbit/releases/download/urbit-v$pkgver/linux64.tgz"
+[ "$_arch" = aarch64 ] && source="urbit.tar.gz::https://github.com/botter-nidnul/urbit/releases/download/urbit-v$pkgver-aarch64/urbit-v$pkgver-aarch64-linux.tgz"
+
+package() {
+	cd "$srcdir"
+
+	install -m 755 -D "urbit-v$pkgver-$_arch-linux/urbit" "$pkgdir/usr/bin/urbit"
+}
+
+sha512sums="889a87362953f50157a8b664ea7b59ccad9d88229c48395df62622891584ca33977d995421a01f62af3ecbb29b9f72001a7596d6a39434222cb133eb661f7d6e  urbit.tar.gz"
+[ "$_arch" = aarch64 ] && sha512sums="79c9294bcdc3e9db1e1e8a542ef21f43b17ab450d3d0e30ab25122ca1c388546f04759638758cc44029b08283a43a2dbb240b6bd967ad7433e224f8f35cfebbf  urbit.tar.gz"
+
